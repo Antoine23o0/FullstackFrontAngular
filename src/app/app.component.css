@@ -1,0 +1,7 @@
+.main-content-background {
+  background-image: url('./tablepingpong.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
