@@ -1,0 +1,10 @@
+<!-- joueur-ajout.component.html -->
+<form #joueurForm="ngForm" (ngSubmit)="ajouterJoueur(joueurForm.value)">
+  <input type="text" ngModel name="prenom" placeholder="Prénom">
+  <input type="text" ngModel name="nom" placeholder="Nom">
+  <input type="text" ngModel name="sexe" placeholder="Sexe">
+  <input type="number" ngModel name="age" placeholder="Âge">
+  <input type="text" ngModel name="niveau" placeholder="Niveau">
+  <input type="number" ngModel name="point" placeholder="Points">
+  <button type="submit">Ajouter Joueur</button>
+</form>
