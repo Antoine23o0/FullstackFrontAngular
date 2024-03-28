@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {JoueursService} from "../joueurs.service";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-joueur-liste',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf],
   templateUrl: './joueurs_liste.component.html',
 })
 export class JoueurListeComponent implements OnInit {

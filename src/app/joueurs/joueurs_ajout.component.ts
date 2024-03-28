@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { JoueursService } from "../joueurs.service";
-import { NgFor } from "@angular/common";
+import { NgFor, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import * as Papa from 'papaparse';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-joueur-ajout',
   standalone: true,
-  imports: [FormsModule, NgFor],
+  imports: [FormsModule, NgFor, NgIf],
   templateUrl: './joueur_ajout.component.html',
 })
 export class JoueurAjoutComponent implements OnInit {
   joueurs: any = [];
+  fichierSelectionne: File | null = null;
+  messageSucces: string = '';
+  afficherAlerte: boolean = false;
 
-  constructor(private joueurService: JoueursService) {
+  constructor(private joueurService: JoueursService, private zone: NgZone) {}
 
-  }
   ngOnInit(): void {
     this.loadJoueur();
   }
 
   loadJoueur() {
     this.joueurService.getJoueurs().subscribe((joueurs: any) => {
-      console.log(joueurs);
       this.joueurs = joueurs;
     });
   }
@@ -38,47 +39,36 @@ export class JoueurAjoutComponent implements OnInit {
       prenom: formData.prenom,
       sexe: formData.sexe
     };
-    console.warn(joueurData);
     this.joueurService.ajouterJoueur(joueurData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.loadJoueur(); // Reload joueurs after adding
+      this.afficherMessage('Le joueur a été ajouté avec succès.');
+      this.loadJoueur();
+    }, (erreur) => {
+      // Gérer l'erreur ici
+      this.afficherMessage('Erreur lors de l\'ajout du joueur.');
     });
   }
 
-  importerJoueurs(event: any) {
-    const files = event.target.files;
-    if (files.length === 0) return;
+  importerJoueurs(event: any): void {
+    this.fichierSelectionne = event.target.files[0];
+  }
 
-    const fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      // Utilisation de Papa Parse pour parser le fichier CSV
-      Papa.parse(fileReader.result as string, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (result: { data: any[]; }) => {
-          console.log(result);
-          result.data.forEach(joueur => {
-            // Structurez votre joueur ici selon le format attendu par votre backend
-            const joueurData = {
-              categorie: [
-                { age: joueur.age },
-                { niveau: joueur.niveau }
-              ],
-              nom: joueur.nom,
-              point: joueur.point,
-              prenom: joueur.prenom,
-              sexe: joueur.sexe
-            };
+  executerImportation(): void {
+    if (!this.fichierSelectionne) return;
+    const formData: FormData = new FormData();
+    formData.append('fichier', this.fichierSelectionne, this.fichierSelectionne.name);
+    this.joueurService.ajouteJoueurDeFichier(formData).subscribe(reponse => {
+      this.afficherMessage('Les joueurs ont été importés avec succès.');
+      this.loadJoueur();
+    });
+    this.fichierSelectionne = null; // Réinitialisez la sélection du fichier après l'importation
+  }
 
-            // Envoi du joueur au backend
-            this.joueurService.ajouterJoueur(joueurData).subscribe((reponse) => {
-              console.warn(reponse);
-              this.loadJoueur(); // Reload joueurs after importing
-            });
-          });
-        }
-      });
-    };
-    fileReader.readAsText(files[0]);
+  afficherMessage(message: string) {
+    this.messageSucces = message;
+    this.afficherAlerte = true;
+    setTimeout(() => this.afficherAlerte = false, 3000); // Cache l'alerte après 3 secondes
+  }
+  supprimer_joueur_component(id:any){
+
   }
 }

@@ -2,14 +2,14 @@ import {Component, inject} from '@angular/core';
 import {JoueursService} from "../joueurs.service";
 import {HttpClient} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-joueurs',
   standalone: true,
   imports: [
-    FormsModule, NgFor, RouterOutlet, RouterLink
+    FormsModule, NgFor, RouterOutlet, RouterLink,NgIf
   ],
   templateUrl: './joueurs.component.html',
   styleUrl: './joueurs.component.css'

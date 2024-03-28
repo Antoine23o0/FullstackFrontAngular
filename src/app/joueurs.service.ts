@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class JoueursService {
 
-  constructor(private http: HttpClient) {} // Inject HttpClient here
+  constructor(private http: HttpClient) {}
 
   getJoueurs(): Observable<any> {
     return this.http.get('/api/joueurs/liste_joueurs');
@@ -15,5 +15,11 @@ export class JoueursService {
 
   ajouterJoueur(joueur: any): Observable<any> {
     return this.http.post('/api/joueurs/add_joueur', joueur );
+  }
+  ajouteJoueurDeFichier(fichier: FormData): Observable<any> {
+    return this.http.put('/api/joueurs/add_fichier', fichier);
+  }
+  supprimer_un_joueur(id : any){
+    return this.http.delete('/api/joueurs/supprimer_joueur',id);
   }
 }
