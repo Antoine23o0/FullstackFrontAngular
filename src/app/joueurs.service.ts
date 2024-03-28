@@ -21,5 +21,6 @@ export class JoueursService {
   }
   supprimer_un_joueur(id : any){
     return this.http.delete('/api/joueurs/supprimer_joueur',id);
+
   }
 }
