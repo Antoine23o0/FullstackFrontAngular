@@ -68,7 +68,5 @@ export class JoueurAjoutComponent implements OnInit {
     this.afficherAlerte = true;
     setTimeout(() => this.afficherAlerte = false, 3000); // Cache l'alerte après 3 secondes
   }
-  supprimer_joueur_component(id:any){
 
-  }
 }
