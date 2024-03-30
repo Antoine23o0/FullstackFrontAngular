@@ -4,7 +4,6 @@
       Ajout de Joueur
     </div>
     <div class="card-body">
-      <!-- Formulaire d'ajout de joueur -->
       <form #joueurForm="ngForm" (ngSubmit)="ajouterJoueur(joueurForm.value)">
         <div class="mb-3">
           <input type="text" ngModel name="prenom" placeholder="Prénom" class="form-control">

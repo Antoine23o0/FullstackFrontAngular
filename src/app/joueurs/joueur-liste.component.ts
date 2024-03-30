@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JoueursService} from "../joueurs.service";
+import {JoueursService} from "../services/joueurs.service";
 import {NgFor, NgIf} from "@angular/common";
 
 @Component({
@@ -14,7 +14,9 @@ export class JoueurListeComponent implements OnInit {
   afficherAlerte: boolean = false;
 
 
-  constructor(private joueurService: JoueursService) {}
+  constructor(private joueurService: JoueursService) {
+
+  }
 
   ngOnInit(): void {
     this.loadJoueur();
@@ -29,21 +31,30 @@ export class JoueurListeComponent implements OnInit {
   afficherMessage(message: string) {
     this.messageSucces = message;
     this.afficherAlerte = true;
-    setTimeout(() => this.afficherAlerte = false, 3000); // Cache l'alerte après 3 secondes
+    setTimeout(() => this.afficherAlerte = false, 3000);
   }
 
 
-  supprimer_joueur_component(id: string) {
-    this.joueurService.supprimer_un_joueur(id).subscribe({
-      next: (reponse) => {
-        console.log('Joueur supprimé avec succès', reponse);
-        this.loadJoueur();
+  confirmerSuppression(joueurId: string) {
+    const confirmation = confirm('Êtes-vous sûr de vouloir supprimer ce joueur ?');
+    if (confirmation) {
+      this.supprimerJoueur(joueurId);
+    }
+  }
+
+  supprimerJoueur(joueurId: string) {
+    this.joueurService.supprimer_un_joueur(joueurId).subscribe({
+      next: (response) => {
+        this.afficherMessage("Le joueur a été supprimé avec succès.");
+        this.loadJoueur()
       },
-      error: (erreur) => {
-        console.error('Erreur lors de la suppression du joueur', erreur);
+      error: (error) => {
+        console.error(error);
+        this.loadJoueur()
       }
     });
   }
+
 
 
 

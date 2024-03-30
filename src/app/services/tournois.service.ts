@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class TournoisService {
-  constructor(private http: HttpClient) {} // Inject HttpClient here
+  constructor(private http: HttpClient) {}
   getTournois(): Observable<any> {
     return this.http.get('/api/tournois/liste_tournois');
   }

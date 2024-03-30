@@ -1,26 +1,28 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import { CommonModule } from '@angular/common';
 import {NgFor} from "@angular/common";
-import {EquipesService} from "../equipes.service";
+import {EquipesService} from "../services/equipes.service";
 import {HttpClient} from "@angular/common/http";
+import {RouterLink, RouterOutlet} from "@angular/router";
+
 
 
 @Component({
   selector: 'app-equipes',
   standalone: true,
-  imports: [FormsModule,NgFor],
+  imports: [FormsModule, NgFor, RouterLink, RouterOutlet,CommonModule],
   templateUrl: './equipes.component.html',
   styleUrl: './equipes.component.css'
 })
-export class EquipesComponent {
+export class EquipesComponent implements OnInit{
   constructor(private http: HttpClient) {}
-
-  private equipesService = inject(EquipesService);
-  equipes: any = [];
-
   ngOnInit(): void {
     this.afficherEquipes();
   }
+
+  private equipesService = inject(EquipesService);
+  equipes: any = [];
 
   afficherEquipes() {
     this.equipesService.getEquipe().subscribe((equipe: any) => {
@@ -29,22 +31,6 @@ export class EquipesComponent {
     });
   }
 
-  ajouterEquipe(formData: any) {
-    const EquipesData = {
-      categorie: [
-        {age: formData.age.toString()},
-        {niveau: formData.niveau}
-      ],
-      nom: formData.nom,
-      point: formData.point,
-      prenom: formData.prenom,
-      sexe: formData.sexe
-    };
-    console.warn(EquipesData);
-    this.equipesService.ajouterEquipe(EquipesData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.afficherEquipes();
-    });
-  }
+
 
 }

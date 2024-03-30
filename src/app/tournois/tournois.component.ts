@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 
 import {HttpClient} from "@angular/common/http";
-import {TournoisService} from "../tournois.service";
+import {TournoisService} from "../services/tournois.service";
 import {NgForOf} from "@angular/common";
 
 

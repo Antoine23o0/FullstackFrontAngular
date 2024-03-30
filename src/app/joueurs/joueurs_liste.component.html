@@ -1,11 +1,14 @@
 <!-- joueur-liste.component.html -->
 <div class="container mt-5">
   <h2>Liste des Joueurs</h2>
+  <div *ngIf="afficherAlerte" class="alert alert-success mt-3" role="alert">
+    {{ messageSucces }}
+  </div>
   <div class="table-responsive mt-4">
     <table class="table table-bordered table-striped table-hover">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Id</th>
         <th scope="col">Prénom</th>
         <th scope="col">Nom</th>
         <th scope="col">Sexe</th>
@@ -25,7 +28,7 @@
         <td>{{ joueur.categorie?.[1].niveau }}</td>
         <td>{{ joueur.point }}</td>
         <td>
-          <button class="btn btn-danger btn-sm" (click)="supprimer_joueur_component(joueur._id)">
+          <button class="btn btn-danger btn-sm" (click)="confirmerSuppression(joueur._id)">
             <i class="fa fa-trash" aria-hidden="true"></i> Supprimer
           </button>
         </td>

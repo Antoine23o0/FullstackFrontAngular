@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JoueursService } from "../joueurs.service";
+import { JoueursService } from "../services/joueurs.service";
 import { NgFor, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgZone } from '@angular/core';
@@ -10,23 +10,15 @@ import { NgZone } from '@angular/core';
   imports: [FormsModule, NgFor, NgIf],
   templateUrl: './joueur_ajout.component.html',
 })
-export class JoueurAjoutComponent implements OnInit {
-  joueurs: any = [];
+export class JoueurAjoutComponent {
+  //joueurs: any = [];
   fichierSelectionne: File | null = null;
   messageSucces: string = '';
   afficherAlerte: boolean = false;
 
   constructor(private joueurService: JoueursService, private zone: NgZone) {}
 
-  ngOnInit(): void {
-    this.loadJoueur();
-  }
 
-  loadJoueur() {
-    this.joueurService.getJoueurs().subscribe((joueurs: any) => {
-      this.joueurs = joueurs;
-    });
-  }
 
   ajouterJoueur(formData: any) {
     const joueurData = {
@@ -41,9 +33,7 @@ export class JoueurAjoutComponent implements OnInit {
     };
     this.joueurService.ajouterJoueur(joueurData).subscribe((reponse) => {
       this.afficherMessage('Le joueur a été ajouté avec succès.');
-      this.loadJoueur();
     }, (erreur) => {
-      // Gérer l'erreur ici
       this.afficherMessage('Erreur lors de l\'ajout du joueur.');
     });
   }
@@ -58,15 +48,14 @@ export class JoueurAjoutComponent implements OnInit {
     formData.append('fichier', this.fichierSelectionne, this.fichierSelectionne.name);
     this.joueurService.ajouteJoueurDeFichier(formData).subscribe(reponse => {
       this.afficherMessage('Les joueurs ont été importés avec succès.');
-      this.loadJoueur();
     });
-    this.fichierSelectionne = null; // Réinitialisez la sélection du fichier après l'importation
+    this.fichierSelectionne = null;
   }
 
   afficherMessage(message: string) {
     this.messageSucces = message;
     this.afficherAlerte = true;
-    setTimeout(() => this.afficherAlerte = false, 3000); // Cache l'alerte après 3 secondes
+    setTimeout(() => this.afficherAlerte = false, 3000);
   }
 
 }

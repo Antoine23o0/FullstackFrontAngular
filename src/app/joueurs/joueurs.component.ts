@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {JoueursService} from "../joueurs.service";
+import {JoueursService} from "../services/joueurs.service";
 import {HttpClient} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgFor, NgIf} from "@angular/common";
