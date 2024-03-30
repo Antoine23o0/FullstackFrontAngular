@@ -36,27 +36,38 @@ export class EquipesAjoutComponent implements OnInit {
   ajouterEquipe() {
     const joueurObj1 = this.joueurs.find(joueur => joueur._id === this.joueur1);
     const joueurObj2 = this.typeEquipe === 'double' ? this.joueurs.find(joueur => joueur._id === this.joueur2) : null;
-    let joueursArray = joueurObj1 ? [{ nom: joueurObj1.prenom + " " + joueurObj1.nom }] : [];
+    let joueursArray = [];
+
+    if (joueurObj1) {
+      joueursArray.push({
+        nom: joueurObj1.prenom + " " + joueurObj1.nom,
+        niveau: joueurObj1.categorie && joueurObj1.categorie.length > 0 ? joueurObj1.categorie[1].niveau : 'Niveau inconnu'
+      });
+    }
     if (joueurObj2) {
-      joueursArray.push({ nom: joueurObj2.prenom + " " + joueurObj2.nom });
+      joueursArray.push({
+        nom: joueurObj2.prenom + " " + joueurObj2.nom,
+        niveau: joueurObj2.categorie && joueurObj2.categorie.length > 0 ? joueurObj2.categorie[1].niveau : 'Niveau inconnu'
+      });
     }
 
     const equipeData = {
       type: this.typeEquipe === 'simple' ? "Simples" : "Doubles",
       joueurs: joueursArray,
     };
-
+    console.log(equipeData);
     this.equipesService.ajouterEquipe(equipeData).subscribe({
       next: (response) => {
         console.log(response);
-        this.afficherMessage ("L'équipe a été créée avec succès!");
+        this.afficherMessage("L'équipe a été créée avec succès!");
       },
       error: (error) => {
         console.error(error);
-        this.afficherMessage ("Une erreur s'est produite lors de la création de l'équipe.");
+        this.afficherMessage("Une erreur s'est produite lors de la création de l'équipe.");
       }
     });
   }
+
   miseAJourNiveauJoueur1() {
     const joueur1 = this.joueurs.find(joueur => joueur._id === this.joueur1);
     if (joueur1) {
