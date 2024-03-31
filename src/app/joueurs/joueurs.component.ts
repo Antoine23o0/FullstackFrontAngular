@@ -33,28 +33,6 @@ export class JoueursComponent {
     });
   }
 
-  getUserFormData(value: any) {
-    console.warn()
-
-  }
-
-  ajouterJoueur(formData: any) {
-    const joueurData = {
-      categorie: [
-        {age: formData.age.toString()},
-        {niveau: formData.niveau}
-      ],
-      nom: formData.nom,
-      point: formData.point,
-      prenom: formData.prenom,
-      sexe: formData.sexe
-    };
-    console.warn(joueurData);
-    this.joueurService.ajouterJoueur(joueurData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.loadJoueur();
-    });
-  }
 }
 
 

@@ -1,6 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, NgZone, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {EquipesService} from "../services/equipes.service";
 import {HttpClient} from "@angular/common/http";
 import {RouterLink, RouterOutlet} from "@angular/router";
@@ -10,11 +10,11 @@ import {CommonModule} from '@angular/common';
 @Component({
   selector: 'app-equipes',
   standalone: true,
-  imports: [FormsModule, NgFor, RouterLink, RouterOutlet, CommonModule],
+  imports: [FormsModule, NgFor,NgIf, RouterLink, RouterOutlet, CommonModule],
   templateUrl: './equipe_liste.component.html'
 })
 export class EquipeListeComponent implements OnInit {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private zone: NgZone,private equipesService:EquipesService) {
   }
 
   messageSucces: string = '';
@@ -24,7 +24,6 @@ export class EquipeListeComponent implements OnInit {
     this.afficherEquipes();
   }
 
-  private equipesService = inject(EquipesService);
   equipes: any = [];
 
 
@@ -38,7 +37,11 @@ export class EquipeListeComponent implements OnInit {
   afficherMessage(message: string) {
     this.messageSucces = message;
     this.afficherAlerte = true;
-    setTimeout(() => this.afficherAlerte = false, 300);
+    this.zone.run(() => {
+      setTimeout(() => {
+        this.afficherAlerte = false;
+      }, 1000);
+    });
   }
 
   confirmerSuppressionEquipe(equipeId: string) {
@@ -59,6 +62,8 @@ export class EquipeListeComponent implements OnInit {
       }
     });
   }
-
-
+  getNiveau(joueur: any): string {
+    const niveauObj = joueur.categorie.find((cat: any) => cat.niveau);
+    return niveauObj ? niveauObj.niveau : 'Non spécifié';
+  }
 }

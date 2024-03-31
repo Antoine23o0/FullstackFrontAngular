@@ -31,7 +31,7 @@ export class JoueurListeComponent implements OnInit {
   afficherMessage(message: string) {
     this.messageSucces = message;
     this.afficherAlerte = true;
-    setTimeout(() => this.afficherAlerte = false, 3000);
+    setTimeout(() => this.afficherAlerte = false, 1000);
   }
 
 

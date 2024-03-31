@@ -4,11 +4,11 @@
       <div class="card">
         <div class="card-header">Ajouter une équipe</div>
         <div class="card-body">
-          <div *ngIf="messageSucces" class="alert alert-success" role="alert">
-            {{ messageSucces }}
-          </div>
-          <form #equipeForm="ngForm" (ngSubmit)="ajouterEquipe()">
+          <form #equipeForm="ngForm" (ngSubmit)="ajouterEquipe(equipeForm)">
             <div class="mb-3">
+              <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
+                {{ messageSucces }}
+              </div>
               <label for="typeEquipe" class="form-label">Type d'équipe</label>
               <select class="form-select" id="typeEquipe" [(ngModel)]="typeEquipe" name="typeEquipe" required (change)="miseAJourNiveauJoueur1()">
                 <option value="" disabled>Sélectionnez le type d'équipe</option>
@@ -20,14 +20,14 @@
               <label for="joueur1" class="form-label">Joueur 1</label>
               <select class="form-select" id="joueur1" [(ngModel)]="joueur1" name="joueur1" required (change)="miseAJourNiveauJoueur1()">
                 <option value="" disabled>Sélectionnez un joueur</option>
-                <option *ngFor="let joueur of joueurs" [ngValue]="joueur._id">{{joueur.prenom}} {{joueur.nom}} Niveau : {{ joueur.categorie?.[1].niveau }}</option>
+                <option *ngFor="let joueur of joueurs" [ngValue]="joueur._id">{{joueur.prenom}} {{joueur.nom}} Niveau : {{ joueur.categorie?.[1].niveau }} {{joueur.sexe}}</option>
               </select>
             </div>
             <div class="mb-3" *ngIf="typeEquipe === 'double'">
               <label for="joueur2" class="form-label">Joueur 2</label>
               <select class="form-select" id="joueur2" [(ngModel)]="joueur2" name="joueur2" required>
                 <option value="" disabled>Sélectionnez un joueur</option>
-                <option *ngFor="let joueur of joueursFiltres" [ngValue]="joueur._id">{{joueur.prenom}} {{joueur.nom}} Niveau : {{ joueur.categorie?.[1].niveau }}</option>
+                <option *ngFor="let joueur of joueursFiltres" [ngValue]="joueur._id">{{joueur.prenom}} {{joueur.nom}} Niveau : {{ joueur.categorie?.[1].niveau }} {{joueur.sexe}}</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="!formulaireValide()">Ajouter l'équipe</button>

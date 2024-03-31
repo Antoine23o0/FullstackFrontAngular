@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <h2 class="mb-4">Liste des Équipes</h2>
   <div class="table-responsive">
-    <div *ngIf="messageSucces" class="alert alert-success" role="alert">
+    <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
       {{ messageSucces }}
     </div>
     <table class="table table-bordered table-hover shadow">
@@ -19,7 +19,9 @@
         <td>{{ equipe.type }}</td>
         <td>
           <ul class="list-group">
-            <li *ngFor="let joueur of equipe.joueurs" class="list-group-item">{{joueur.nom }}</li>
+            <li *ngFor="let joueur of equipe.joueurs" class="list-group-item">
+              Nom: {{ joueur.nom }}, Prenom: {{ joueur.prenom }}, Sexe: {{ joueur.sexe }}, Niveau: {{ getNiveau(joueur) }}
+            </li>
           </ul>
         </td>
         <td>
