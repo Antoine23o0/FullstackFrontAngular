@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TournoisService {
-  constructor(private http: HttpClient) {}
-  getTournois(): Observable<any> {
-    return this.http.get('/api/tournois/liste_tournois');
+
+  constructor(private http: HttpClient) { }
+
+  enregistrerPoint(idMatch: string, equipeId: string) {
+    return this.http.put('/api/enregistrer_point/${idMatch}/${equipeId}', {});
   }
 
-  ajouterTournois(tournoi: any): Observable<any> {
-    return this.http.post('/api/tournois/add_tournoi', tournoi );
+  finirMatch(idMatch: string) {
+    return this.http.put('/api/finir_match/${idMatch}', {});
+  }
+
+  lancerMatch() {
+    return this.http.post('/api/lancer_match', {});
   }
 }
-
-
-
-
-
-
-
-

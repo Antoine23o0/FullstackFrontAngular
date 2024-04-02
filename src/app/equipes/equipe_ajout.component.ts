@@ -1,18 +1,18 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { JoueursService } from "../service/joueurs.service";
 import { EquipesService } from "../service/equipes.service";
-import {CommonModule, NgFor, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {from} from "rxjs";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-equipes',
   templateUrl: './equipe_ajout.component.html',
   styleUrls: ['./equipes.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule,NgIf,NgFor],
+  imports: [CommonModule, FormsModule],
 })
 export class EquipesAjoutComponent implements OnInit {
+  nomEquipe: string = ''; // Ajout du champ pour le nom de l'équipe
   typeEquipe: string = '';
   joueur1: string = '';
   joueur2: string = '';
@@ -21,7 +21,7 @@ export class EquipesAjoutComponent implements OnInit {
   joueursFiltres: any[] = [];
   afficherAlerte: boolean = false;
 
-  constructor(private joueursService: JoueursService,private zone: NgZone, private equipesService: EquipesService) {}
+  constructor(private joueursService: JoueursService, private zone: NgZone, private equipesService: EquipesService) {}
 
   ngOnInit(): void {
     this.chargerJoueurs();
@@ -34,36 +34,34 @@ export class EquipesAjoutComponent implements OnInit {
     });
   }
 
-  ajouterEquipe(form : any) {
+  ajouterEquipe(form: any) {
     const joueurObj1 = this.joueurs.find(joueur => joueur._id === this.joueur1);
     const joueurObj2 = this.typeEquipe === 'double' ? this.joueurs.find(joueur => joueur._id === this.joueur2) : null;
     let joueursArray = [];
-    console.log(joueurObj1)
 
     if (joueurObj1) {
       joueursArray.push({
-        joueur1 : joueurObj1._id
+        joueur1: joueurObj1._id
       });
     }
 
     if (joueurObj2) {
       joueursArray.push({
-         joueur2 :joueurObj2._id
+        joueur2: joueurObj2._id
       });
-      console.log("joueurObj2 ", joueurObj2.id)
     }
 
     const equipeData = {
+      nom: this.nomEquipe, // Ajout du nom de l'équipe
       type: this.typeEquipe === 'simple' ? "Simples" : "Doubles",
       joueurs: joueursArray,
     };
-    console.log(equipeData);
+
     this.equipesService.ajouterEquipe(equipeData).subscribe({
       next: (response) => {
         console.log(response);
         this.afficherMessage("L'équipe a été créée avec succès!");
         form.resetForm();
-
       },
       error: (error) => {
         console.error(error);
@@ -75,7 +73,7 @@ export class EquipesAjoutComponent implements OnInit {
   miseAJourNiveauJoueur1() {
     const joueur1 = this.joueurs.find(joueur => joueur._id === this.joueur1);
     if (joueur1) {
-      this.joueursFiltres = this.joueurs.filter(joueur => joueur.categorie[1].niveau === joueur1.categorie[1].niveau && joueur._id !== this.joueur1 && joueur.sexe ===joueur1.sexe);
+      this.joueursFiltres = this.joueurs.filter(joueur => joueur.categorie[1].niveau === joueur1.categorie[1].niveau && joueur._id !== this.joueur1 && joueur.sexe === joueur1.sexe);
     } else {
       this.joueursFiltres = [];
     }
@@ -99,5 +97,4 @@ export class EquipesAjoutComponent implements OnInit {
       }, 1000);
     });
   }
-
 }

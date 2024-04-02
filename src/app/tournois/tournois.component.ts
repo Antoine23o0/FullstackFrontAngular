@@ -1,64 +1,44 @@
-import {Component, inject} from '@angular/core';
-
-import {HttpClient} from "@angular/common/http";
-import {TournoisService} from "../service/tournois.service";
-import {NgForOf} from "@angular/common";
-
-
-
+import { Component } from '@angular/core';
+import { TournoisService } from "../service/tournois.service";
 
 @Component({
   selector: 'app-tournois',
-  standalone: true,
-  imports: [
-    NgForOf
-  ],
   templateUrl: './tournois.component.html',
-  styleUrl: './tournois.component.css'
+  standalone: true,
+  styleUrls: ['./tournois.component.css']
 })
-
 export class TournoisComponent {
-  private  tournoisService=inject(TournoisService);
-  tournois: any = [];
+  idMatchInput: string;
+  equipeIdInput: string;
+  idMatchFinInput: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private tournoisService: TournoisService) {
+    this.idMatchInput = '';
+    this.equipeIdInput = '';
+    this.idMatchFinInput = '';
   }
 
-
-  ngOnInit(): void {
-    this.afficherTournois();
-  }
-
-  afficherTournois() {
-    this.tournoisService.getTournois().subscribe((tournois: any) => {
-      console.log(tournois);
-      this.tournois = tournois;
+  enregistrerPoint(idMatch: string, equipeId: string) {
+    this.tournoisService.enregistrerPoint(idMatch, equipeId).subscribe(response => {
+      console.log(response);
+      this.idMatchInput = idMatch
+      this.equipeIdInput = equipeId
+      // Gérer la réponse du backend si nécessaire
     });
   }
 
-  getUserFormData(value: any) {
-    console.warn()
-
-  }
-
-  ajouterJoueur(formData: any) {
-    const tournoisData = {
-      categorie: [
-        {age: formData.age.toString()},
-        {niveau: formData.niveau}
-      ],
-      nom: formData.nom,
-      point: formData.point,
-      prenom: formData.prenom,
-      sexe: formData.sexe
-    };
-    console.warn(tournoisData);
-    this.tournoisService.ajouterTournois(tournoisData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.afficherTournois();
+  finirMatch(idMatch: string) {
+    this.tournoisService.finirMatch(idMatch).subscribe(response => {
+      console.log(response);
+      this.idMatchFinInput = idMatch
+      // Gérer la réponse du backend si nécessaire
     });
   }
 
-
-
+  lancerMatch() {
+    this.tournoisService.lancerMatch().subscribe(response => {
+      console.log(response);
+      // Gérer la réponse du backend si nécessaire
+    });
+  }
 }

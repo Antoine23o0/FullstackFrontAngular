@@ -16,16 +16,16 @@ import {NgForOf} from "@angular/common";
 })
 
 export class Match_ajouteComponent implements OnInit {
-
   equipes: any[] = [];
-  tablesDisponibles: any[] = [];
+  equipesFiltrees: any[] = [];
+  selectedEquipe1: any;
+  selectedEquipe2: any;
   matchsExistants: any[] = [];
 
   constructor(
     private serviceMatch: MatchsService,
     private equipeService: EquipesService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getEquipes();
@@ -35,7 +35,20 @@ export class Match_ajouteComponent implements OnInit {
   getEquipes() {
     this.equipeService.getEquipe().subscribe((equipes: any[]) => {
       this.equipes = equipes;
+      this.equipesFiltrees = equipes;
     });
+  }
+
+  filtrerEquipes() {
+    const equipe1 = this.equipes.find(equipe => equipe._id === this.selectedEquipe1);
+    if (equipe1 && equipe1.joueurs.length > 0) {
+      const sexeJoueur1 = equipe1.joueurs[0].sexe;
+      this.equipesFiltrees = this.equipes.filter(equipe => {
+        return sexeJoueur1 && equipe._id !== this.selectedEquipe1;
+      });
+    } else {
+      this.equipesFiltrees = this.equipes.filter(equipe => equipe._id !== this.selectedEquipe1);
+    }
   }
 
 
@@ -47,19 +60,15 @@ export class Match_ajouteComponent implements OnInit {
 
   ajouterMatch(data: any) {
     const conflit = this.matchsExistants.some(match => {
-      // Vérifier s'il y a un conflit de date et d'heure
       return match.date === data.date && match.heure === data.heure;
     });
-
     if (conflit) {
-      // Gérer le conflit (par exemple, afficher un message d'erreur)
       console.error("Conflit de date et heure avec un match existant.");
     } else {
-      // Pas de conflit, ajouter le match
       this.serviceMatch.ajouterMatch(data).subscribe((response) => {
         console.log("Match ajouté avec succès :", response);
-        // Réinitialiser le formulaire ou effectuer d'autres actions nécessaires
       });
     }
   }
 }
+

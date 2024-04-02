@@ -8,6 +8,7 @@
       <thead class="table-dark">
       <tr>
         <th scope="col">Id</th>
+        <th scope="col">Nom</th> <!-- Ajout du champ Nom -->
         <th scope="col">Type</th>
         <th scope="col">Joueurs</th>
         <th scope="col">Actions</th>
@@ -16,6 +17,7 @@
       <tbody>
       <tr *ngFor="let equipe of equipes; let i = index">
         <th scope="row">{{ i + 1 }}</th>
+        <td>{{ equipe.nom }}</td> <!-- Affichage du nom de l'équipe -->
         <td>{{ equipe.type }}</td>
         <td>
           <ul class="list-group">

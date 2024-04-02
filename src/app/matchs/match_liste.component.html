@@ -7,13 +7,17 @@
         <th scope="col">Équipe 1</th>
         <th scope="col">Équipe 2</th>
         <th scope="col">Date</th>
+        <th scope="col">Heure</th>
+        <th scope="col">Score</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let match of matchs">
-        <td>{{ match.equipes[0]["equipe_1"] }}</td>
-        <td>{{ match.equipes[1]["equipe_2"] }}</td>
+        <td>{{ match.equipe1 }}</td>
+        <td>{{ match.equipe2 }}</td>
         <td>{{ match.date }}</td>
+        <td>{{ match.heure }}</td>
+        <td>{{ match.resultat }}</td>
       </tr>
       </tbody>
     </table>

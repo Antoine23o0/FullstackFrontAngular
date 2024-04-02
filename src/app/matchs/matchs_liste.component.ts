@@ -29,9 +29,9 @@ export class Matchs_listeComponent implements OnInit{
   }
 
   getMatchs() {
-    this.serviceMatch.getAllMatchs().subscribe((joueurs : any ) => {
-      console.log(joueurs);
-      this.matchs = joueurs;
+    this.serviceMatch.getAllMatchs().subscribe((matchs : any ) => {
+      console.log(matchs);
+      this.matchs = matchs;
     });
   }
 }

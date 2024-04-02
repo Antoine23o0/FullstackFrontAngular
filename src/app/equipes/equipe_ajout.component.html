@@ -9,6 +9,10 @@
               <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
                 {{ messageSucces }}
               </div>
+              <label for="nomEquipe" class="form-label">Nom de l'équipe</label>
+              <input type="text" class="form-control" id="nomEquipe" name="nomEquipe" [(ngModel)]="nomEquipe" required>
+            </div>
+            <div class="mb-3">
               <label for="typeEquipe" class="form-label">Type d'équipe</label>
               <select class="form-select" id="typeEquipe" [(ngModel)]="typeEquipe" name="typeEquipe" required (change)="miseAJourNiveauJoueur1()">
                 <option value="" disabled>Sélectionnez le type d'équipe</option>
