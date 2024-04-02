@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div *ngIf="equipement">
+    <h2>Détails de l'Équipement</h2>
+
+    <p><strong>Quantité de Balles de Tennis de Table:</strong> {{ equipement.balles.quantite }}</p>
+    <p><strong>État des Balles de Tennis de Table:</strong> {{ equipement.balles.etat }}</p>
+    <p><strong>Disponibilité des Balles de Tennis de Table:</strong> {{ equipement.balles.disponibilite }}</p>
+
+    <p><strong>Quantité de Filets:</strong> {{ equipement.filets.quantite }}</p>
+    <p><strong>État des Filets:</strong> {{ equipement.filets.etat }}</p>
+    <p><strong>Disponibilité des Filets:</strong> {{ equipement.filets.disponibilite }}</p>
+
+    <p><strong>Disponibilité des Tables de Tennis de Table:</strong> {{ equipement.tables_tennis.disponibilite }}</p>
+    <p><strong>État des Tables de Tennis de Table:</strong> {{ equipement.tables_tennis.etat }}</p>
+
+    <button class="btn btn-primary" (click)="modifierEquipement()">Modifier</button>
+  </div>
+
+  <div *ngIf="!equipement">
+    <h2>aucun equipement trouver, veuille entrez les equipement du tournoi</h2>
+
+      <form #equipementForm="ngForm" (ngSubmit)="ajouterEquipement(equipementForm.value)">
+        <div class="form-group">
+          <label for="table_tenis_quantite">Quantité de Tables de Tennis :</label>
+          <input type="number" class="form-control" id="table_tenis_quantite" name="table_tenis_quantite" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="table_tenis_etat">État des Tables de Tennis :</label>
+          <input type="text" class="form-control" id="table_tenis_etat" name="table_tenis_etat" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="table_tenis_disponibilite">Disponibilité des Tables de Tennis :</label>
+          <input type="text" class="form-control" id="table_tenis_disponibilite" name="table_tenis_disponibilite" ngModel required>
+        </div>
+
+        <div class="form-group">
+          <label for="filet_quantite">Quantité de Filets :</label>
+          <input type="number" class="form-control" id="filet_quantite" name="filet_quantite" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="filet_etat">État des Filets :</label>
+          <input type="text" class="form-control" id="filet_etat" name="filet_etat" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="filet_disponibilite">Disponibilité des Filets :</label>
+          <input type="text" class="form-control" id="filet_disponibilite" name="filet_disponibilite" ngModel required>
+        </div>
+
+        <div class="form-group">
+          <label for="balle_quantite">Quantité de Balle :</label>
+          <input type="number" class="form-control" id="balle_quantite" name="balle_quantite" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="balle_etat">État des Filets :</label>
+          <input type="text" class="form-control" id="balle_etat" name="balle_etat" ngModel required>
+        </div>
+        <div class="form-group">
+          <label for="balle_disponibilite">Disponibilité des Filets :</label>
+          <input type="text" class="form-control" id="balle_disponibilite" name="balle_disponibilite" ngModel required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter Equipement</button>
+        <button type="reset" class="btn btn-secondary ml-2">Annuler</button>
+      </form>
+    </div>
+
+</div>

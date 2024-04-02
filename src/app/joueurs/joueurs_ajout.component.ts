@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
-import { JoueursService } from "../services/joueurs.service";
+import { JoueursService } from "../service/joueurs.service";
 import { NgFor, NgIf } from "@angular/common";
+
 import { FormsModule } from "@angular/forms";
 
 
@@ -15,7 +16,11 @@ export class JoueurAjoutComponent {
   messageSucces: string = '';
   afficherAlerte: boolean = false;
 
+
   constructor(private joueurService: JoueursService) {}
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 import {Component, inject, NgZone, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgFor, NgIf} from "@angular/common";
-import {EquipesService} from "../services/equipes.service";
+import {EquipesService} from "../service/equipes.service";
 import {HttpClient} from "@angular/common/http";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {CommonModule} from '@angular/common';

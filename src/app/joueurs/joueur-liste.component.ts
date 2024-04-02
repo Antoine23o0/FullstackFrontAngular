@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JoueursService} from "../services/joueurs.service";
+import {JoueursService} from "../service/joueurs.service";
 import {NgFor, NgIf} from "@angular/common";
 
 @Component({

@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import { JoueursService } from "../services/joueurs.service";
-import { EquipesService } from "../services/equipes.service";
+import { JoueursService } from "../service/joueurs.service";
+import { EquipesService } from "../service/equipes.service";
 import {CommonModule, NgFor, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {from} from "rxjs";

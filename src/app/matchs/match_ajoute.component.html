@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="mb-4">Ajouter un Match</h2>
+  <form (submit)="ajouterMatch(matchForm.value)" #matchForm="ngForm">
+    <div class="mb-3">
+      <label for="equipe1" class="form-label">Équipe 1</label>
+      <select class="form-select" id="equipe1" name="equipe1" ngModel="selectedEquipe1" required>
+        <option *ngFor="let equipe of equipes" [value]="equipe.id">{{ equipe.nom }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="equipe2" class="form-label">Équipe 2</label>
+      <select class="form-select" id="equipe2" name="equipe2" ngModel="selectedEquipe2" required>
+        <option *ngFor="let equipe of equipes" [value]="equipe.id">{{ equipe.nom }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="table" class="form-label">Numéro de Table</label>
+      <select class="form-select" id="table" name="table" ngModel="selectedTable" required>
+        <option *ngFor="let table of tablesDisponibles" [value]="table.numero">{{ table.numero }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date" ngModel="selectedDate" required>
+    </div>
+    <div class="mb-3">
+      <label for="heure" class="form-label">Heure</label>
+      <input type="time" class="form-control" id="heure" name="heure" ngModel="selectedHeure" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>
