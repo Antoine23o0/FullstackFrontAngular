@@ -5,11 +5,12 @@ import {RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {JoueursService} from "../service/joueurs.service";
 import {EquipesService} from "../service/equipes.service";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-match_ajoute',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, NgForOf],
   templateUrl: './match_ajoute.component.html',
   //styleUrl: './matchs.component.css'
 })

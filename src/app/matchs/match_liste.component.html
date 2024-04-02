@@ -1,9 +1,21 @@
-<div class="container">
-  <h2>Liste des Matchs</h2>
-  <ul>
-    <li *ngFor="let match of matchs">
-      {{ match.equipes[0]["equipe_1"] }} vs {{ match.equipes[1]["equipe_2"] }} - {{ match.date }}
-    </li>
-  </ul>
+<div class="container mt-5">
+  <h2 class="mb-4">Liste des Matchs</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover shadow">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Équipe 1</th>
+        <th scope="col">Équipe 2</th>
+        <th scope="col">Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matchs">
+        <td>{{ match.equipes[0]["equipe_1"] }}</td>
+        <td>{{ match.equipes[1]["equipe_2"] }}</td>
+        <td>{{ match.date }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-

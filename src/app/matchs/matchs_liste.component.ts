@@ -3,13 +3,15 @@ import {MatchsService} from "../service/matchs.service";
 import {HttpClient} from "@angular/common/http";
 import {RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-matchs_litse',
   standalone: true,
   imports: [
     RouterLink,
-    FormsModule
+    FormsModule,
+    NgForOf
   ],
   templateUrl: './match_liste.component.html',
   styleUrl: './matchs.component.css'
