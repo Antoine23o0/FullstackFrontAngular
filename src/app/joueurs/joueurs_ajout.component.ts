@@ -13,7 +13,6 @@ export class JoueurAjoutComponent implements OnInit {
   joueurs: any = [];
 
   constructor(private joueurService: JoueursService) {
-
   }
 
   ngOnInit(): void {

@@ -5,7 +5,9 @@ import {JoueurListeComponent} from "./joueurs/joueur-liste.component";
 import {JoueurAjoutComponent} from "./joueurs/joueurs_ajout.component";
 import {TournoisComponent} from "./tournois/tournois.component";
 import {MatchsComponent} from "./matchs/matchs.component";
-import {EquipementGetComponent} from "./equipement-get/equipement-get.component";
+import {EquipementGetComponent} from "./equipement/equipement-get.component";
+import {Matchs_listeComponent} from "./matchs/matchs_liste.component";
+import {Match_ajouteComponent} from "./matchs/match_ajoute.component";
 
 export const routes: Routes = [
   { path: 'joueur', component: JoueursComponent, children: [
@@ -15,8 +17,8 @@ export const routes: Routes = [
   {path: 'equipe',component : EquipesComponent},
   {path:'tournoi',component: TournoisComponent},
   {path:'matchs',component: MatchsComponent, children : [
-      { path: '', component: JoueurListeComponent },
-      { path: 'ajout', component: JoueurAjoutComponent }
+      { path: 'liste', component: Matchs_listeComponent },
+      { path: 'ajouter', component: Match_ajouteComponent }
     ]},
   {path:'equipement',component: EquipementGetComponent},
 
