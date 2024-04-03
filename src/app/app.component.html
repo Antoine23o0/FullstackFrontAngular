@@ -1,5 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pingpong</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Mon Application</a>
+  <a class="navbar-brand" href="#">Pingpong</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,3 +33,36 @@
 <div class="main-content-background">
   <router-outlet></router-outlet>
 </div>
+
+<footer class="footer footer-transparent py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+        <h5 class="text-uppercase mb-4">Pingpong</h5>
+        <p class="font-italic text-muted">Explorez le monde avec nous. Restez connecté pour des mises à jour et plus.</p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+        <h5 class="text-uppercase mb-4">Liens rapides</h5>
+        <ul class="list-unstyled mb-0">
+           <li class="nav-item">
+              <a class="nav-link" routerLink="joueur" routerLinkActive="active">Joueurs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="equipe" routerLinkActive="active">Équipes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="matchs" routerLinkActive="active">Matchs</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-lg-0">
+        <h5 class="text-uppercase mb-4">Contactez-nous</h5>
+        <p class="text-muted">Email: sshinwari&#64;iut.univ-paris8.fr</p>
+        <p class="text-muted">123 Avenue du Code, 75001 Programmation</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

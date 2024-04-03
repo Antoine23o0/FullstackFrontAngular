@@ -63,7 +63,7 @@ export class EquipeListeComponent implements OnInit {
     });
   }
   getNiveau(joueur: any): string {
-    const niveauObj = joueur.categorie.find((cat: any) => cat.niveau);
+    const niveauObj = joueur.categorie.find((niveau: any) => niveau.niveau);
     return niveauObj ? niveauObj.niveau : 'Non spécifié';
   }
 }

@@ -12,19 +12,23 @@ import {Match_ajouteComponent} from "./matchs/match_ajoute.component";
 import {EquipementGetComponent} from "./equipement/equipement-get.component";
 
 export const routes: Routes = [
-  { path: 'joueur', component: JoueursComponent, children: [
+  {path: 'joueur', component: JoueursComponent, children: [
+      { path: '', redirectTo: 'liste', pathMatch: 'full' },
       { path: 'liste', component: JoueurListeComponent },
       { path: 'ajout', component: JoueurAjoutComponent }
-    ]},
+    ]
+  },
   {path: 'equipe',component : EquipesComponent ,children: [
+      { path: '',redirectTo : 'liste',pathMatch: 'full'},
       { path: 'liste', component: EquipeListeComponent },
       { path: 'ajout', component: EquipesAjoutComponent}
     ]},
-  {path:'tournoi',component: TournoisComponent},
   {path:'matchs',component: MatchsComponent, children : [
+      { path: '',redirectTo : 'liste',pathMatch: 'full'},
       { path: 'liste', component: Matchs_listeComponent },
       { path: 'ajouter', component: Match_ajouteComponent }
     ]},
   {path:'equipement',component: EquipementGetComponent},
+  {path:'tournoi',component: TournoisComponent},
 ];
 
