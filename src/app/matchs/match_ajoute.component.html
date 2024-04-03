@@ -6,6 +6,11 @@
         <div class="card-body">
           <form (submit)="ajouterMatch(matchForm.value)" #matchForm="ngForm" class="was-validated">
             <div class="mb-3">
+              <label for="numeroMatch" class="form-label">Numéro de Match</label>
+              <input type="text" class="form-control" id="numeroMatch" name="numeroMatch" ngModel required>
+              <div class="invalid-feedback">Veuillez saisir un numéro de match.</div>
+            </div>
+            <div class="mb-3">
               <label for="equipe1" class="form-label">Équipe 1</label>
               <select class="form-select" id="equipe1" name="equipe1" [(ngModel)]="selectedEquipe1" (change)="filtrerEquipes()" required>
                 <option *ngFor="let equipe of equipes" [value]="equipe._id">{{ equipe.nom}}</option>
@@ -21,12 +26,12 @@
             </div>
             <div class="mb-3">
               <label for="date" class="form-label">Date</label>
-              <input type="date" class="form-control" id="date" name="date" ngModel="selectedDate" required>
+              <input type="date" class="form-control" id="date" name="date" ngModel required>
               <div class="invalid-feedback">Veuillez sélectionner une date.</div>
             </div>
             <div class="mb-3">
               <label for="heure" class="form-label">Heure</label>
-              <input type="time" class="form-control" id="heure" name="heure" ngModel="selectedHeure" required>
+              <input type="time" class="form-control" id="heure" name="heure" ngModel required>
               <div class="invalid-feedback">Veuillez sélectionner une heure.</div>
             </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>

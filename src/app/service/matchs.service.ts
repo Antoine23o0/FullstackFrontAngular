@@ -17,8 +17,4 @@ export class MatchsService {
     return this.http.post('/api/matchs/add_match', match);
   }
 
-  supprimer_match(id: string): Observable<any> {
-    return this.http.delete('/api/matchs/supprimer_match/' + id);
-  }
-
 }
