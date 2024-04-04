@@ -10,17 +10,17 @@ export class JoueursService {
   constructor(private http: HttpClient) {}
 
   getJoueurs(): Observable<any> {
-    return this.http.get('/api/joueurs/liste_joueurs');
+    return this.http.get('/api/joueurs/');
   }
 
   ajouterJoueur(joueur: any): Observable<any> {
-    return this.http.post('/api/joueurs/add_joueur', joueur );
+    return this.http.post('/api/joueurs/', joueur );
   }
   ajouteJoueurDeFichier(fichier: FormData): Observable<any> {
     return this.http.put('/api/joueurs/add_fichier', fichier);
   }
   supprimer_un_joueur(id: string): Observable<any> {
-    return this.http.delete('/api/joueurs/supprimer_joueur/' + id);
+    return this.http.delete('/api/joueurs/' + id);
   }
 
 }

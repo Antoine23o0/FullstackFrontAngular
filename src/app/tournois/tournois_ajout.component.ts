@@ -31,7 +31,6 @@ export class TournoisAjoutComponent {
   constructor(private matcherService: MatchsService, private tournoisService: TournoisService) {
     this.getMatchs();
   }
-
   getMatchs() {
     this.matcherService.getAllMatchs().subscribe((matchs: any[]) => {
       this.matchs = matchs;
@@ -39,27 +38,8 @@ export class TournoisAjoutComponent {
     });
   }
 
-  updateScore(index: number, score1: number, score2: number) {
-    const match = this.matchs[index];
-    match.score1 = score1;
-    match.score2 = score2;
 
-    this.matcherService.modifier_scores(match._id, score1, score2).subscribe({
-      next: (updatedMatch) => {
-        console.log('Score updated successfully', updatedMatch);
-      },
-      error: (error) => {
-        console.error('Error updating score', error);
-      }
-    });
-  }
 
-  getAllEquipeGagnant() {
-    this.tournoisService.getAllMatchsGagnats().subscribe((equipesGagants: any[]) => {
-      this.equipe_gagnant = equipesGagants;
-      console.log("Équipes gagnantes chargées :", equipesGagants);
-    });
-  }
 
   creerTournoi() {
     this.tournoisService.ajouterTournoi(this.nouveauTournoi).subscribe({

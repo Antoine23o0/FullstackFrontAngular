@@ -10,16 +10,16 @@ export class TournoisService {
   constructor(private http: HttpClient) {
   }
 
-  getAllMatchsGagnats(): Observable<any> {
+  getAllEquipesGagnants(): Observable<any> {
     return this.http.get('/api/tournois/equipes_gagnants');
   }
 
   ajouterTournoi(tournoi: any): Observable<any> {
-    return this.http.post('/api/tournois/add_tournoi', tournoi);
+    return this.http.post('/api/tournois/', tournoi);
   }
 
   getAllMacthsTournoi(): Observable<any> {
-    return this.http.get('/api/tournois/premier_tournoi_matchs')
+    return this.http.get('/api/tournois/matchs_dans_tounoi')
   }
 
   avancerTournoi(): Observable<any> {

@@ -10,13 +10,13 @@ export class EquipesService {
   constructor(private http: HttpClient) {}
 
   getEquipe(): Observable<any> {
-    return this.http.get('/api/equipes/liste_equipes');
+    return this.http.get('/api/equipes/');
   }
 
   ajouterEquipe(equipe: any): Observable<any> {
-    return this.http.post('/api/equipes/add_equipe', equipe );
+    return this.http.post('/api/equipes/', equipe );
   }
   supprimer_une_equipe(id: string): Observable<any> {
-    return this.http.delete('/api/equipes/delete_equipe/' + id);
+    return this.http.delete('/api/equipes/' + id);
   }
 }

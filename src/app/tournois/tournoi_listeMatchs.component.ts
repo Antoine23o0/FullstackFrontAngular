@@ -21,13 +21,14 @@ import { RouterLink, RouterOutlet } from "@angular/router";
 })
 export class TournoisListeMatchsComponent {
   matchs: any[] = [];
-  equipe_gagnant: any[] = [];
+  equipes_gagnants: any[] = [];
+  unEquipeGagnatFinal: any = null;
 
   constructor(private matchService: MatchsService, private tournoisService: TournoisService) {
-    this.getMatchs();
+    this.getMatchsDansTournoi();
   }
 
-  getMatchs() {
+  getMatchsDansTournoi() {
     this.tournoisService.getAllMacthsTournoi().subscribe({
       next: (matchs) => {
         this.matchs = matchs;
@@ -42,33 +43,41 @@ export class TournoisListeMatchsComponent {
     this.matchService.modifier_scores(match._id, score1, score2).subscribe({
       next: (updatedMatch) => {
         console.log('Score updated successfully', updatedMatch);
-        // Optionnellement, rafraîchir la liste des matchs ici si nécessaire
+        this.getMatchsDansTournoi(); // Rafraîchit les matchs après mise à jour
       },
       error: (error) => console.error('Error updating score', error)
     });
   }
 
   getAllEquipeGagnant() {
-    this.tournoisService.getAllMatchsGagnats().subscribe({
+    this.tournoisService.getAllEquipesGagnants().subscribe({
       next: (equipesGagants) => {
-        this.equipe_gagnant = equipesGagants;
+        this.equipes_gagnants = equipesGagants;
         console.log("Équipes gagnantes chargées :", equipesGagants);
+        setTimeout(() => {
+          this.equipes_gagnants = []; // Vide le tableau des équipes gagnantes
+          console.log("Tableau des équipes gagnantes vidé");
+        }, 20000); // Attend 20 second
       },
       error: (error) => console.error("Erreur lors du chargement des équipes gagnantes :", error)
     });
   }
+
   avancerRonde() {
     this.tournoisService.avancerTournoi().subscribe({
       next: (response) => {
         console.log('La ronde a été avancée avec succès.', response);
-        this.getMatchs();
+        if (response.equipe_gagnante) {
+          this.matchs = [];
+          this.unEquipeGagnatFinal = response.equipe_gagnante;
+          console.log('Équipe gagnante finale:', this.unEquipeGagnatFinal);
+        } else {
+          this.getMatchsDansTournoi();
+        }
       },
       error: (error) => {
         console.error('Erreur lors de l’avancement de la ronde.', error);
       }
     });
   }
-
-
-
 }

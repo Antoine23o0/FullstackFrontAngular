@@ -12,15 +12,11 @@ export class EquipementsService {
 
 
   ajouterEquipement(equipement: any): Observable<any> {
-    return this.http.post('/api/equipement', equipement );
+    return this.http.post('/api/equipement/', equipement );
   }
 
   getEquipement(){
-    return this.http.get('/api/equipement/affiche')
-  }
-
-  updateEquipement(newEquipementData: any): Observable<any> {
-    return this.http.put('/api/equipement/modifier_equipement', newEquipementData);
+    return this.http.get('/api/equipement/')
   }
 
 }

@@ -10,15 +10,15 @@ export class MatchsService {
 
 
   getAllMatchs(): Observable<any> {
-    return this.http.get('/api/matchs/liste_matchs');
+    return this.http.get('/api/matchs/');
   }
 
   ajouterMatch(match: any): Observable<any> {
-    return this.http.post('/api/matchs/add_match', match);
+    return this.http.post('/api/matchs/', match);
   }
 
   modifier_scores(id: string, score1: number, score2: number): Observable<any> {
-    return this.http.put('/api/matchs/update_match/' + id, { score1, score2 });
+    return this.http.put('/api/matchs/' + id, { score1, score2 });
   }
 
 
