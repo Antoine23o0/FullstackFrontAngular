@@ -17,7 +17,7 @@ export class JoueursService {
     return this.http.post('/api/joueurs/', joueur );
   }
   ajouteJoueurDeFichier(fichier: FormData): Observable<any> {
-    return this.http.put('/api/joueurs/add_fichier', fichier);
+    return this.http.post('/api/joueurs/add_fichier', fichier);
   }
   supprimer_un_joueur(id: string): Observable<any> {
     return this.http.delete('/api/joueurs/' + id);

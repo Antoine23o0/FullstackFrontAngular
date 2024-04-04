@@ -13,6 +13,9 @@ import {EquipementGetComponent} from "./equipement/equipement-get.component";
 import {TournoisAjoutComponent} from "./tournois/tournois_ajout.component";
 import {TournoisListeMatchsComponent} from "./tournois/tournoi_listeMatchs.component";
 
+
+
+/*
 export const routes: Routes = [
   { path: 'joueur', component: JoueursComponent, children: [
       { path: 'liste', component: JoueurListeComponent },
@@ -32,4 +35,34 @@ export const routes: Routes = [
     ]},
   {path:'equipement',component: EquipementGetComponent},
 ];
+*/
+
+
+export const routes: Routes = [
+  {path: 'joueur', component: JoueursComponent, children: [
+      { path: '', redirectTo: 'liste', pathMatch: 'full' },
+      { path: 'liste', component: JoueurListeComponent },
+      { path: 'ajout', component: JoueurAjoutComponent }
+    ]
+  },
+  {path: 'equipe',component : EquipesComponent ,children: [
+      { path: '',redirectTo : 'liste',pathMatch: 'full'},
+      { path: 'liste', component: EquipeListeComponent },
+      { path: 'ajout', component: EquipesAjoutComponent}
+    ]},
+  {path:'matchs',component: MatchsComponent, children : [
+      { path: '',redirectTo : 'liste',pathMatch: 'full'},
+      { path: 'liste', component: Matchs_listeComponent },
+      { path: 'ajouter', component: Match_ajouteComponent }
+    ]},
+  {path:'equipement',component: EquipementGetComponent},
+  {path:'tournoi',component: TournoisComponent,children :[
+          { path: '',redirectTo : 'listeMatchs',pathMatch: 'full'},
+          {path: 'ajoutTournoi',component: TournoisAjoutComponent},
+          {path: 'listeMatchs',component: TournoisListeMatchsComponent}
+    ]},
+
+];
+
+
 

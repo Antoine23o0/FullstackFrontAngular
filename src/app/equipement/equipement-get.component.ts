@@ -39,6 +39,7 @@ export class EquipementGetComponent implements OnInit{
   ajouterEquipement(date : any){
     this.equipementServ.ajouterEquipement(date).subscribe((reponse)=>{
       console.warn(reponse)
+      this.getEquipement();
     });
   }
 

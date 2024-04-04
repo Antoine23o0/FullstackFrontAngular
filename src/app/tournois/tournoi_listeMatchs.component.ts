@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { TournoisService } from "../service/tournois.service";
 import { MatchsService } from "../service/matchs.service";
 import { FormsModule } from "@angular/forms";
@@ -19,12 +19,15 @@ import { RouterLink, RouterOutlet } from "@angular/router";
   ],
   styleUrls: ['./tournois.component.css']
 })
-export class TournoisListeMatchsComponent {
+export class TournoisListeMatchsComponent implements OnInit{
   matchs: any[] = [];
   equipes_gagnants: any[] = [];
   unEquipeGagnatFinal: any = null;
 
   constructor(private matchService: MatchsService, private tournoisService: TournoisService) {
+
+  }
+  ngOnInit(): void {
     this.getMatchsDansTournoi();
   }
 

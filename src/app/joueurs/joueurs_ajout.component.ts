@@ -26,7 +26,6 @@ export class JoueurAjoutComponent {
 
   ajouterJoueur(form: any) {
     const formData = form.value;
-
     const joueurData = {
       categorie: [
         { age: formData.age.toString() },

@@ -17,9 +17,9 @@ export class EquipesAjoutComponent implements OnInit {
   joueur1: string = '';
   joueur2: string = '';
   joueurs: any[] = [];
-  messageSucces: string = '';
   joueursFiltres: any[] = [];
   afficherAlerte: boolean = false;
+  messageSucces: string = '';
 
   constructor(private joueursService: JoueursService, private zone: NgZone, private equipesService: EquipesService) {}
 

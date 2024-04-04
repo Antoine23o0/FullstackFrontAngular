@@ -26,6 +26,11 @@ export class TournoisService {
     return this.http.post('/api/tournois/avancer_ronde', {});
   }
 
-
+  supprimerlePermierTournoi(): Observable<any> {
+    return this.http.delete('/api/tournois/');
+  }
+  supprimer_un_match(id: string): Observable<any> {
+    return this.http.delete('/api/matchs/' + id);
+  }
 
 }

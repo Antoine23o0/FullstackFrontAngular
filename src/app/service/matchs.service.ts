@@ -20,6 +20,9 @@ export class MatchsService {
   modifier_scores(id: string, score1: number, score2: number): Observable<any> {
     return this.http.put('/api/matchs/' + id, { score1, score2 });
   }
+  supprimer_un_match(id: string): Observable<any> {
+    return this.http.delete('/api/matchs/' + id);
+  }
 
 
 }

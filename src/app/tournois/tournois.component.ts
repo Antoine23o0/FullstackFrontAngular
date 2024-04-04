@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import { TournoisService } from "../service/tournois.service";
 import {MatchsService} from "../service/matchs.service";
 import {FormsModule} from "@angular/forms";
@@ -20,9 +20,33 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   styleUrls: ['./tournois.component.css']
 })
 export class TournoisComponent {
-  constructor(private matcherService: MatchsService,private tournoisService: TournoisService) {
+  messageSucces: string = '';
+  afficherAlerte: boolean = false;
+  constructor(private matcherService: MatchsService,private tournoisService: TournoisService,private zone: NgZone ) {
 
   }
+  supprimerLePremierTournoi() {
+    this.tournoisService.supprimerlePermierTournoi().subscribe({
+      next: (response) => {
+        this.afficherMessage('Tournoi supprimé avec succès');
+      },
+      error: (error) => {
+        console.error('Erreur lors de la suppression de tournoi:', error);
+        this.afficherMessage('Erreur lors de la suppression de tournoi');
+      }
+    });
+  }
+
+  afficherMessage(message: string) {
+    this.messageSucces = message;
+    this.afficherAlerte = true;
+    this.zone.run(() => {
+      setTimeout(() => {
+        this.afficherAlerte = false;
+      }, 1000);
+    });
+  }
+
 
 
 

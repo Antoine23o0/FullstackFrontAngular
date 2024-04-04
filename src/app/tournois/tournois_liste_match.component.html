@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Section pour les matchs -->
-  <div *ngIf="matchs.length > 0" class="row">
+  <div *ngIf="matchs && matchs.length > 0; else noMatchesTemplate" class="row">
     <div *ngFor="let match of matchs; let i = index" class="col-md-4 mb-4">
       <div class="card">
         <div class="card-body">
@@ -24,46 +24,53 @@
     </div>
   </div>
 
+  <!-- Template pour le cas où il n'y a pas de matchs -->
+  <ng-template #noMatchesTemplate>
+    <div class="row h-100 justify-content-center align-items-center" style="min-height: 300px;">
+      <div class="col-12 text-center">
+        <p class="lead">Il faut ajouter un tournoi</p>
+      </div>
+    </div>
+  </ng-template>
+
   <!-- Boutons d'action -->
-  <div class="row">
-    <div class="col-12 text-center mt-4">
+  <div class="row mt-4 justify-content-center">
+    <div class="col-auto">
       <button (click)="getAllEquipeGagnant()" class="btn btn-primary">Afficher les Équipes Gagnantes</button>
       <button (click)="avancerRonde()" class="btn btn-secondary ml-2">Avancer à la Ronde Suivante</button>
     </div>
   </div>
 
-
   <!-- Section pour l'affichage de l'équipe gagnante finale et ses joueurs -->
-  <div *ngIf="unEquipeGagnatFinal" class="row mt-4">
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ unEquipeGagnatFinal.nom }} ({{ unEquipeGagnatFinal.type }})</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Joueurs:</h6>
-          <ul class="list-unstyled">
-            <li *ngFor="let joueur of unEquipeGagnatFinal.joueurs">
+  <div *ngIf="unEquipeGagnatFinal" class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title mb-0">L'Équipe Gagnante</h3>
+        </div>
+        <div class="card-body bg-light">
+          <h4 class="text-center mb-4">{{ unEquipeGagnatFinal.nom }} ({{ unEquipeGagnatFinal.type }})</h4>
+          <div class="text-center mb-3">
+            <h6 class="card-subtitle text-muted">Joueurs:</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let joueur of unEquipeGagnatFinal.joueurs" class="list-group-item">
               {{ joueur.prenom }} {{ joueur.nom }} - Sexe: {{ joueur.sexe }},
-              Catégories: Age {{ joueur.categorie[0].age }}, Niveau {{ joueur.categorie[1].niveau }}
+              Catégories: Âge {{ joueur.categorie[0].age }}, Niveau {{ joueur.categorie[1].niveau }}
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-
+  <!-- Section pour les équipes gagnantes -->
   <div *ngIf="equipes_gagnants && equipes_gagnants.length > 0" class="row mt-4">
     <div *ngFor="let equipe of equipes_gagnants" class="col-md-3 mb-4">
       <div class="card">
         <div class="card-body">
-          <p class="card-text"><strong>Équipe Gagnante:</strong> {{ equipe.equipeGagnante }}</p>
+          <p><strong>Équipe Gagnante:</strong> {{ equipe.equipeGagnante }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
