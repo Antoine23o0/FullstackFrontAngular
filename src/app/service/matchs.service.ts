@@ -17,4 +17,9 @@ export class MatchsService {
     return this.http.post('/api/matchs/add_match', match);
   }
 
+  modifier_scores(id: string, score1: number, score2: number): Observable<any> {
+    return this.http.put('/api/matchs/update_match/' + id, { score1, score2 });
+  }
+
+
 }

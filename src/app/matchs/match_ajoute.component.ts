@@ -21,6 +21,8 @@ export class Match_ajouteComponent implements OnInit {
   selectedEquipe1: any;
   selectedEquipe2: any;
   matchsExistants: any[] = [];
+  score1 :number = 0;
+  score2 : number =0;
 
   constructor(
     private serviceMatch: MatchsService,
@@ -59,6 +61,7 @@ export class Match_ajouteComponent implements OnInit {
   }
 
   ajouterMatch(data: any) {
+    console.log(data);
     const conflit = this.matchsExistants.some(match => {
       return match.date === data.date && match.heure === data.heure;
     });

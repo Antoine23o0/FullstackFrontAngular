@@ -1,32 +1,36 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { TournoisService } from "../service/tournois.service";
-import {MatchsService} from "../service/matchs.service";
-import {FormsModule} from "@angular/forms";
-import {DatePipe, NgFor, NgIf} from "@angular/common";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import { MatchsService } from "../service/matchs.service";
+import { FormsModule } from "@angular/forms";
+import { DatePipe, NgFor, NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-tournois',
-  templateUrl: './tournois.component.html',
+  templateUrl: './tournois_ajout.component.html',
   standalone: true,
   imports: [
     FormsModule,
     DatePipe,
     NgIf,
-    NgFor,
-    RouterLink,
-    RouterOutlet
+    NgFor
   ],
   styleUrls: ['./tournois.component.css']
 })
-export class TournoisComponent {
+export class TournoisAjoutComponent {
   matchs: any[] = [];
-  equipe_gagnant : any[]=[];
+  equipe_gagnant: any[] = [];
+  nouveauTournoi = {
+    format: '',
+    niveau: '',
+    date: '',
+    duree: '',
+    lieu: '',
+    match: []
+  };
 
-  constructor(private matcherService: MatchsService,private tournoisService: TournoisService) {
+  constructor(private matcherService: MatchsService, private tournoisService: TournoisService) {
     this.getMatchs();
   }
-
 
   getMatchs() {
     this.matcherService.getAllMatchs().subscribe((matchs: any[]) => {
@@ -37,7 +41,6 @@ export class TournoisComponent {
 
   updateScore(index: number, score1: number, score2: number) {
     const match = this.matchs[index];
-    console.log("Donnée de updateScore", match);
     match.score1 = score1;
     match.score2 = score2;
 
@@ -51,13 +54,22 @@ export class TournoisComponent {
     });
   }
 
-  getAllEquipeGagnant(){
+  getAllEquipeGagnant() {
     this.tournoisService.getAllMatchsGagnats().subscribe((equipesGagants: any[]) => {
       this.equipe_gagnant = equipesGagants;
-      console.log("Joueurs chargés :", equipesGagants);
+      console.log("Équipes gagnantes chargées :", equipesGagants);
     });
   }
 
+  creerTournoi() {
+    this.tournoisService.ajouterTournoi(this.nouveauTournoi).subscribe({
+      next: (tournoiCree) => {
+        console.log('Tournoi créé avec succès', tournoiCree);
 
-
+      },
+      error: (erreur) => {
+        console.error('Erreur lors de la création du tournoi', erreur);
+      }
+    });
+  }
 }

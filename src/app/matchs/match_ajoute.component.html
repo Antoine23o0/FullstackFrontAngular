@@ -34,6 +34,13 @@
               <input type="time" class="form-control" id="heure" name="heure" ngModel required>
               <div class="invalid-feedback">Veuillez sélectionner une heure.</div>
             </div>
+            <div class="mb-3">
+              <label for="heure" class="form-label">Score</label>
+              <input type="text" class="form-control" id="score1" name="score1" [(ngModel)]="score1" required>
+              :
+              <input type="text" class="form-control" id="score2" name="score2" [(ngModel)]="score2" required>
+
+            </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
           </form>
         </div>
