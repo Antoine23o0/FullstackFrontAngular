@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <!-- Section Détails de l'Équipement -->
+  <div *ngIf="equipement" class="animate__animated animate__fadeIn">
+    <h2 class="mb-4 text-center">Détails de l'Équipement</h2>
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <h5 class="text-secondary">Tables de Tennis de Table</h5>
+            <p><strong>Quantité:</strong> {{ equipement.table_tenis_quantite }}</p>
+            <p><strong>État:</strong> {{ equipement.table_tenis_etat }}</p>
+            <p><strong>Disponibilité:</strong> {{ equipement.table_tenis_disponibilite }}</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h5 class="text-secondary">Filets</h5>
+            <p><strong>Quantité:</strong> {{ equipement.filet_quantite }}</p>
+            <p><strong>État:</strong> {{ equipement.filet_etat }}</p>
+            <p><strong>Disponibilité:</strong> {{ equipement.filet_disponibilite }}</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h5 class="text-secondary">Balles</h5>
+            <p><strong>Quantité:</strong> {{ equipement.balle_quantite }}</p>
+            <p><strong>État:</strong> {{ equipement.balle_etat }}</p>
+            <p><strong>Disponibilité:</strong> {{ equipement.balle_disponibilite }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire Ajouter Équipement -->
+  <div *ngIf="!equipement" class="animate__animated animate__fadeIn">
+    <h2 class="mb-4 text-center">Ajouter Nouvel Équipement</h2>
+    <form #equipementForm="ngForm" (ngSubmit)="ajouterEquipement(equipementForm.value)">
+      <div class="card border-primary shadow">
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="table_tenis_quantite">Quantité de Tables:</label>
+              <input type="number" class="form-control" id="table_tenis_quantite" name="table_tenis_quantite" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="table_tenis_etat">État des Tables:</label>
+              <input type="text" class="form-control" id="table_tenis_etat" name="table_tenis_etat" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="table_tenis_disponibilite">Disponibilité:</label>
+              <input type="text" class="form-control" id="table_tenis_disponibilite" name="table_tenis_disponibilite" ngModel required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="filet_quantite">Quantité de Filets:</label>
+              <input type="number" class="form-control" id="filet_quantite" name="filet_quantite" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="filet_etat">État des Filets:</label>
+              <input type="text" class="form-control" id="filet_etat" name="filet_etat" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="filet_disponibilite">Disponibilité:</label>
+              <input type="text" class="form-control" id="filet_disponibilite" name="filet_disponibilite" ngModel required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="balle_quantite">Quantité de Balles:</label>
+              <input type="number" class="form-control" id="balle_quantite" name="balle_quantite" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="balle_etat">État des Balles:</label>
+              <input type="text" class="form-control" id="balle_etat" name="balle_etat" ngModel required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="balle_disponibilite">Disponibilité:</label>
+              <input type="text" class="form-control" id="balle_disponibilite" name="balle_disponibilite" ngModel required>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="reset" class="btn btn-secondary ml-2">Effacer</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

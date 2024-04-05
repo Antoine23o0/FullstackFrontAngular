@@ -1,24 +1,5 @@
-<div class="container mt-5">
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead class="thead-light">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Type</th>
-        <th scope="col">Joueurs</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let equipe of equipes; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ equipe.type }}</td>
-        <td>
-          <ul>
-            <li *ngFor="let joueur of equipe.joueurs">{{ joueur.nom }}</li>
-          </ul>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<nav class="nav nav-pills flex-column flex-sm-row">
+  <a class="flex-sm-fill text-sm-center nav-link active" routerLink="liste" routerLinkActive="active">Liste des equipes</a>
+  <a class="flex-sm-fill text-sm-center nav-link active" routerLink="ajout" routerLinkActive="active">Ajouter un equipe</a>
+</nav>
+<router-outlet></router-outlet>

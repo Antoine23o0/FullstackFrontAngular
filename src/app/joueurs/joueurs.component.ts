@@ -1,15 +1,15 @@
 import {Component, inject} from '@angular/core';
-import {JoueursService} from "../joueurs.service";
+import {JoueursService} from "../service/joueurs.service";
 import {HttpClient} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {NgFor} from "@angular/common";
+import {NgFor, NgIf} from "@angular/common";
 import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-joueurs',
   standalone: true,
   imports: [
-    FormsModule, NgFor, RouterOutlet, RouterLink
+    FormsModule, NgFor, RouterOutlet, RouterLink,NgIf
   ],
   templateUrl: './joueurs.component.html',
   styleUrl: './joueurs.component.css'
@@ -33,28 +33,6 @@ export class JoueursComponent {
     });
   }
 
-  getUserFormData(value: any) {
-    console.warn()
-
-  }
-
-  ajouterJoueur(formData: any) {
-    const joueurData = {
-      categorie: [
-        {age: formData.age.toString()},
-        {niveau: formData.niveau}
-      ],
-      nom: formData.nom,
-      point: formData.point,
-      prenom: formData.prenom,
-      sexe: formData.sexe
-    };
-    console.warn(joueurData);
-    this.joueurService.ajouterJoueur(joueurData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.loadJoueur();
-    });
-  }
 }
 
 

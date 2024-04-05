@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Liste des Matchs</h2>
+  <div class="table-responsive">
+    <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
+      {{ messageSucces }}
+    </div>
+    <table class="table table-bordered table-hover shadow">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Équipe 1</th>
+        <th scope="col">Équipe 2</th>
+        <th scope="col">Date</th>
+        <th scope="col">Heure</th>
+        <th scope="col">Score</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matchs">
+        <td>{{ match.equipe1 }}</td>
+        <td>{{ match.equipe2 }}</td>
+        <td>{{ match.date }}</td>
+        <td>{{ match.heure }}</td>
+        <td>{{match.score1  }} : {{match.score2 }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="confirmerSuppressionMatch(match._id)">
+            <i class="fa fa-trash" aria-hidden="true"></i> Supprimer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

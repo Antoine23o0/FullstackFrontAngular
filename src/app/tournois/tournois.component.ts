@@ -1,63 +1,54 @@
-import {Component, inject} from '@angular/core';
-
-import {HttpClient} from "@angular/common/http";
-import {TournoisService} from "../tournois.service";
-import {NgForOf} from "@angular/common";
-
-
-
+import {Component, NgZone} from '@angular/core';
+import { TournoisService } from "../service/tournois.service";
+import {MatchsService} from "../service/matchs.service";
+import {FormsModule} from "@angular/forms";
+import {DatePipe, NgFor, NgIf} from "@angular/common";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-tournois',
+  templateUrl: './tournois.component.html',
   standalone: true,
   imports: [
-    NgForOf
+    FormsModule,
+    DatePipe,
+    NgIf,
+    NgFor,
+    RouterLink,
+    RouterOutlet
   ],
-  templateUrl: './tournois.component.html',
-  styleUrl: './tournois.component.css'
+  styleUrls: ['./tournois.component.css']
 })
-
 export class TournoisComponent {
-  private  tournoisService=inject(TournoisService);
-  tournois: any = [];
+  messageSucces: string = '';
+  afficherAlerte: boolean = false;
+  constructor(private matcherService: MatchsService,private tournoisService: TournoisService,private zone: NgZone ) {
 
-  constructor(private http: HttpClient) {
   }
-
-
-  ngOnInit(): void {
-    this.afficherTournois();
-  }
-
-  afficherTournois() {
-    this.tournoisService.getTournois().subscribe((tournois: any) => {
-      console.log(tournois);
-      this.tournois = tournois;
+  supprimerLePremierTournoi() {
+    this.tournoisService.supprimerlePermierTournoi().subscribe({
+      next: (response) => {
+        this.afficherMessage('Tournoi supprimé avec succès');
+      },
+      error: (error) => {
+        console.error('Erreur lors de la suppression de tournoi:', error);
+        this.afficherMessage('Erreur lors de la suppression de tournoi');
+      }
     });
   }
 
-  getUserFormData(value: any) {
-    console.warn()
-
-  }
-
-  ajouterJoueur(formData: any) {
-    const tournoisData = {
-      categorie: [
-        {age: formData.age.toString()},
-        {niveau: formData.niveau}
-      ],
-      nom: formData.nom,
-      point: formData.point,
-      prenom: formData.prenom,
-      sexe: formData.sexe
-    };
-    console.warn(tournoisData);
-    this.tournoisService.ajouterTournois(tournoisData).subscribe((reponse) => {
-      console.warn(reponse);
-      this.afficherTournois();
+  afficherMessage(message: string) {
+    this.messageSucces = message;
+    this.afficherAlerte = true;
+    this.zone.run(() => {
+      setTimeout(() => {
+        this.afficherAlerte = false;
+      }, 1000);
     });
   }
+
+
+
 
 
 

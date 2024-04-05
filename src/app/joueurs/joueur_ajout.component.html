@@ -1,10 +1,48 @@
-<!-- joueur-ajout.component.html -->
-<form #joueurForm="ngForm" (ngSubmit)="ajouterJoueur(joueurForm.value)">
-  <input type="text" ngModel name="prenom" placeholder="Prénom">
-  <input type="text" ngModel name="nom" placeholder="Nom">
-  <input type="text" ngModel name="sexe" placeholder="Sexe">
-  <input type="number" ngModel name="age" placeholder="Âge">
-  <input type="text" ngModel name="niveau" placeholder="Niveau">
-  <input type="number" ngModel name="point" placeholder="Points">
-  <button type="submit">Ajouter Joueur</button>
-</form>
+<!-- joueur_ajout.component.html -->
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Ajout de Joueur
+    </div>
+    <div *ngIf="afficherAlerte" class="alert alert-success mt-3" role="alert">
+      {{ messageSucces }}
+    </div>
+    <div class="card-body">
+      <form #joueurForm="ngForm" (ngSubmit)="joueurForm.form.valid && ajouterJoueur(joueurForm)">
+        <div class="mb-3">
+          <input type="text" ngModel name="prenom" placeholder="Prénom" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <input type="text" ngModel name="nom" placeholder="Nom" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="sexeSelect">Sexe</label>
+          <select class="form-select" id="sexeSelect" ngModel name="sexe" required>
+            <option value="">Sélectionner le sexe</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <input type="number" ngModel name="age" placeholder="Âge" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="niveauSelect">Niveau</label>
+          <select class="form-select" id="niveauSelect" ngModel name="niveau" required>
+            <option value="">Sélectionner le niveau</option>
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!joueurForm.form.valid">Ajouter un Joueur</button>
+      </form>
+      <div class="form-group mt-3">
+        <label for="fileInput" class="form-label">Importer des joueurs :</label>
+        <input type="file" id="fileInput" (change)="importerJoueurs($event)" accept=".csv" class="form-control" #fileInput>
+        <button *ngIf="fichierSelectionne" type="button" class="btn btn-success mt-2" (click)="executerImportation(fileInput)">Importer le fichier</button>
+
+      </div>
+    </div>
+  </div>
+</div>

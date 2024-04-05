@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
+    {{ messageSucces }}
+  </div>
+  <h2 class="text-center mb-4">Créer un nouveau tournoi</h2>
+  <form (ngSubmit)="creerTournoi()" class="shadow-lg p-4 rounded" style="background-color: #f8f9fa;">
+
+    <div class="form-group mb-3">
+      <label for="nomTournoi" class="form-label">Nom du Tournoi:</label>
+      <input type="text" id="nomTournoi" [(ngModel)]="nouveauTournoi.nomTournoi" name="nomTournoi" class="form-control" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="duree" class="form-label">Durée:</label>
+      <input type="text" id="duree" [(ngModel)]="nouveauTournoi.duree" name="duree" class="form-control" required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="lieu" class="form-label">Lieu:</label>
+      <input type="text" id="lieu" [(ngModel)]="nouveauTournoi.lieu" name="lieu" class="form-control" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="date" class="form-label">Date:</label>
+      <input type="date" id="date" [(ngModel)]="nouveauTournoi.date" name="date" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Créer le tournoi</button>
+  </form>
+</div>

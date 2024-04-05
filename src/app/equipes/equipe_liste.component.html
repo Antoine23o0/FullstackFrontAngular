@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Liste des Équipes</h2>
+  <div class="table-responsive">
+    <div *ngIf="afficherAlerte" class="alert alert-success" role="alert">
+      {{ messageSucces }}
+    </div>
+    <table class="table table-bordered table-hover shadow">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th> <!-- Ajout du champ Nom -->
+        <th scope="col">Type</th>
+        <th scope="col">Joueurs</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let equipe of equipes; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ equipe.nom }}</td> <!-- Affichage du nom de l'équipe -->
+        <td>{{ equipe.type }}</td>
+        <td>
+          <ul class="list-group">
+            <li *ngFor="let joueur of equipe.joueurs" class="list-group-item">
+              Nom: {{ joueur.nom }}, Prenom: {{ joueur.prenom }}, Sexe: {{ joueur.sexe }}, Niveau: {{ getNiveau(joueur) }}
+            </li>
+          </ul>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="confirmerSuppressionEquipe(equipe._id)">
+            <i class="fa fa-trash" aria-hidden="true"></i> Supprimer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

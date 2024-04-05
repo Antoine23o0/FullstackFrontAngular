@@ -1,22 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Mon Application</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="joueur" routerLinkActive="active">Joueurs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="equipe" routerLinkActive="active">Équipes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="tournoi" routerLinkActive="active">Tournois</a>
-      </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">Tournoi de Pingpong</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link active" routerLink="joueur" routerLinkActive="active">Joueurs <span class="sr-only"></span></a>
+        <a class="nav-item nav-link" routerLink="equipe" routerLinkActive="active">Équipes</a>
+        <a class="nav-item nav-link" routerLink="matchs" routerLinkActive="active">Matchs</a>
+        <a class="nav-item nav-link" routerLink="equipement" routerLinkActive="active">Équipement</a>
+        <a class="nav-item nav-link" routerLink="tournoi" routerLinkActive="active">Tournois</a>
+      </div>
+    </div>
   </div>
 </nav>
-<div class="main-content-background">
-  <router-outlet></router-outlet>
+
+<div class="main-content-background py-4">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
